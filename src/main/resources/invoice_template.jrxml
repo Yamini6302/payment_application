@@ -1,0 +1,81 @@
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="invoice_template" pageWidth="595" pageHeight="842" columnCount="1">
+
+    <parameter name="invoiceNumber" class="java.lang.String"/>
+    <parameter name="paymentDate" class="java.lang.String"/>
+    <parameter name="description" class="java.lang.String"/>
+    <parameter name="clientDetails" class="java.lang.String"/>
+    <parameter name="bankAccountNumber" class="java.lang.String"/>
+    <parameter name="amount" class="java.lang.Double"/>
+    <parameter name="currency" class="java.lang.String"/>
+    <parameter name="username" class="java.lang.String"/>
+    <parameter name="ponumber" class="java.lang.String"/>
+    <parameter name="tds" class="java.lang.Integer"/>
+
+    <title>
+        <band height="100">
+            <textField>
+                <reportElement x="0" y="0" width="200" height="30"/>
+                <textFieldExpression><![CDATA[$P{invoiceNumber}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="300" y="0" width="200" height="30"/>
+                <textFieldExpression><![CDATA[$P{paymentDate}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <detail>
+        <band height="100">
+            <textField>
+                <reportElement x="0" y="0" width="200" height="20"/>
+                <textFieldExpression><![CDATA["Username: " + $P{username}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="300" y="0" width="200" height="20"/>
+                <textFieldExpression><![CDATA["PO Number: " + $P{ponumber}]]></textFieldExpression>
+            </textField>
+
+            <!-- Amount and Currency -->
+            <textField>
+                <reportElement x="0" y="30" width="200" height="20"/>
+                <textFieldExpression><![CDATA["Amount: " + $P{currency} + " " + $P{amount}]]></textFieldExpression>
+            </textField>
+
+            <!-- TDS -->
+            <textField>
+                <reportElement x="300" y="30" width="200" height="20"/>
+                <textFieldExpression><![CDATA["TDS: " + $P{tds} + "%"]]></textFieldExpression>
+            </textField>
+
+            <!-- Bank Account Information -->
+            <textField>
+                <reportElement x="0" y="60" width="200" height="20"/>
+                <textFieldExpression><![CDATA["Bank Account: " + $P{bankAccountNumber}]]></textFieldExpression>
+            </textField>
+
+            <!-- Description -->
+            <textField>
+                <reportElement x="0" y="80" width="500" height="20"/>
+                <textFieldExpression><![CDATA[$P{description}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- Footer for signature or additional information -->
+    <summary>
+        <band height="50">
+            <!-- You can add a signature field here if needed -->
+            <!-- Example for signature -->
+            <!--
+            <textField>
+                <reportElement x="0" y="0" width="200" height="20"/>
+                <textFieldExpression><![CDATA["Signature: " + $F{vendorSignature}]]></textFieldExpression>
+            </textField>
+            -->
+        </band>
+    </summary>
+
+</jasperReport>
